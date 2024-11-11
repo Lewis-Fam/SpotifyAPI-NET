@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+#if !NETSTANDARD2_0
 using System.Runtime.CompilerServices;
+#endif
 using System.Threading;
 using System.Threading.Tasks;
 using SpotifyAPI.Web.Http;
@@ -50,6 +52,8 @@ namespace SpotifyAPI.Web
       Episodes = new EpisodesClient(_apiConnector);
       Library = new LibraryClient(_apiConnector);
       Markets = new MarketsClient(_apiConnector);
+      Audiobooks = new AudiobooksClient(_apiConnector);
+      Chapters = new ChaptersClient(_apiConnector);
     }
 
     public IPaginator DefaultPaginator { get; }
@@ -81,6 +85,10 @@ namespace SpotifyAPI.Web
     public ILibraryClient Library { get; }
 
     public IMarketsClient Markets { get; }
+
+    public IAudiobooksClient Audiobooks { get; }
+
+    public IChaptersClient Chapters { get; }
 
     public IResponse? LastResponse { get; private set; }
 

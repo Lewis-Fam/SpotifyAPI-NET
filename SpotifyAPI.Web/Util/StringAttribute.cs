@@ -1,5 +1,7 @@
 using System;
+#if !NETSTANDARD2_0
 using System.Diagnostics.CodeAnalysis;
+#endif
 using System.Linq;
 using System.Reflection;
 

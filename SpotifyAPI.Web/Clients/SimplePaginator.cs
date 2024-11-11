@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+#if !NETSTANDARD2_0
 using System.Runtime.CompilerServices;
+#endif
 using System.Threading;
 using System.Threading.Tasks;
 using SpotifyAPI.Web.Http;

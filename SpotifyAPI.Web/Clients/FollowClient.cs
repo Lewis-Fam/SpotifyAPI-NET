@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using SpotifyAPI.Web.Http;
@@ -33,7 +32,7 @@ namespace SpotifyAPI.Web
       var statusCode = await API
         .Put(URLs.CurrentUserFollower(), request.BuildQueryParams(), request.BuildBodyParams(), cancel)
         .ConfigureAwait(false);
-      return statusCode == HttpStatusCode.NoContent;
+      return HTTPUtil.StatusCodeIsSuccess(statusCode);
     }
 
     public async Task<bool> FollowPlaylist(string playlistId, CancellationToken cancel = default)
@@ -43,7 +42,7 @@ namespace SpotifyAPI.Web
       var statusCode = await API
         .Put(URLs.PlaylistFollowers(playlistId), null, null, cancel)
         .ConfigureAwait(false);
-      return statusCode == HttpStatusCode.OK;
+      return HTTPUtil.StatusCodeIsSuccess(statusCode);
     }
 
     public async Task<bool> FollowPlaylist(string playlistId, FollowPlaylistRequest request, CancellationToken cancel = default)
@@ -54,7 +53,7 @@ namespace SpotifyAPI.Web
       var statusCode = await API
         .Put(URLs.PlaylistFollowers(playlistId), null, request.BuildBodyParams(), cancel)
         .ConfigureAwait(false);
-      return statusCode == HttpStatusCode.OK;
+      return HTTPUtil.StatusCodeIsSuccess(statusCode);
     }
 
     public Task<FollowedArtistsResponse> OfCurrentUser(CancellationToken cancel = default)
@@ -78,7 +77,7 @@ namespace SpotifyAPI.Web
       var statusCode = await API
         .Delete(URLs.CurrentUserFollower(), request.BuildQueryParams(), request.BuildBodyParams(), cancel)
         .ConfigureAwait(false);
-      return statusCode == HttpStatusCode.NoContent;
+      return HTTPUtil.StatusCodeIsSuccess(statusCode);
     }
 
     public async Task<bool> UnfollowPlaylist(string playlistId, CancellationToken cancel = default)
@@ -88,7 +87,7 @@ namespace SpotifyAPI.Web
       var statusCode = await API
         .Delete(URLs.PlaylistFollowers(playlistId), null, null, cancel)
         .ConfigureAwait(false);
-      return statusCode == HttpStatusCode.OK;
+      return HTTPUtil.StatusCodeIsSuccess(statusCode);
     }
   }
 }
